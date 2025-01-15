@@ -1,6 +1,6 @@
 # base image
-FROM node:14.19.1-alpine
-
+#FROM node:14.19.1-alpine
+FROM node:18-alpine
 # set working directory
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
