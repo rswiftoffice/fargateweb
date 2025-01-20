@@ -7,11 +7,11 @@ on:
 
 env:
   AWS_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
-  ECR_REPOSITORY: fargateweb
-  ECS_SERVICE: fargate-web-service
-  ECS_CLUSTER: fargate-cluster
+  ECR_REPOSITORY: ${{ secrets.ECR_REPOSITORY }}
+  ECS_SERVICE: ${{ secrets.ECS_SERVICE }}
+  ECS_CLUSTER: ${{ secrets.ECS_CLUSTER }}
   ECS_TASK_DEFINITION: .aws/task-definition.json
-  CONTAINER_NAME: "fargateweb"
+  CONTAINER_NAME: ${{ secrets.CONTAINER_NAME }}
   
 
 jobs:
@@ -27,9 +27,9 @@ jobs:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@0e613a0980cbf65ed5b322eb7a1e075d28913a83
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
+          sso-start-url: ${{ secrets.AWS_SSO_START_URL }}
+          sso-account-id: ${{ secrets.AWS_SSO_ACCOUNT_ID }}
+          sso-role-name: ${{ secrets.AWS_SSO_ROLE_NAME }}
           aws-region: ${{ env.AWS_REGION }}
 
       - name: Login to Amazon ECR
